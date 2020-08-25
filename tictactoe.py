@@ -37,6 +37,8 @@ def darw_figures():
                 pygame.draw.circle(screen,CREAM,(int(coloumn*200+100),int(row*200+100)),CIRCLE_RADIUS,CIRCLE_WIDTH )
             elif board[row][coloumn]==2:
                 pygame.draw.line(screen,BLACK,(coloumn*200+SPACE,row*200+200-SPACE),(coloumn*200+200-SPACE,row*200+SPACE),CROSS_WIDTH)
+                pygame.draw.line(screen,BLACK,(coloumn*200+SPACE,row*200+SPACE),(coloumn*200+200-SPACE,row*200+200-SPACE),CROSS_WIDTH)
+
 
 
 def mark_square(row,coloumn,player):
