@@ -14,8 +14,6 @@ pygame.display.set_caption('TIC TAC TOE')
 screen.fill(BACKGROUND_COLOUR)
 
 
-#pygame.draw.line(screen,RED,(10,10),(300,300),10)
-
 def draw_lines():
     pygame.draw.line(screen,LINE_COLOR,(0,200),(600,200),LINE_WIDTH)
     pygame.draw.line(screen,LINE_COLOR,(0,400),(600,400),LINE_WIDTH)
