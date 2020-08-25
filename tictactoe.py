@@ -50,6 +50,11 @@ while True:
             sys.exit()
 
         if event.type==pygame.MOUSEBUTTONDOWN:
+            mouseX=event.pos[0]
+            mouseY=event.pos[1]
+
+            clicked_row=int(mouseY//200)
+            clicked_coloumn=int(mouseX//200)
 
 
 
