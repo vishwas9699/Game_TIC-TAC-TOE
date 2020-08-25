@@ -57,6 +57,62 @@ def is_board_full():
                 return False
     return True
 
+def check_win(player):
+    for coloumn in range(BOARD_COLOUMN):
+        if board[0][coloumn]==player and board[1][coloumn]==player and board[2][coloumn]==player:
+            draw_vertical_winning_line(coloumn,player)
+            return True
+    for coloumn in range(BOARD_ROWS):
+        if board[row][0]==player and board[row][1]==player and board[row][2]==player:
+            draw_horizantal_winning_line(row,player)
+            return True    
+    if board[2][0]==player and board[1][1]==player and board[0][2]==player:
+        draw_asscending_diagonol(player)
+        return True
+    if board[0][0]==player and board[1][1]==player and board[2][2]==player:
+        darw_decending_diagonol(player)
+        return True
+    return False
+
+def draw_vertical_winning_line(coloumn,player):
+    posX=coloumn*200+100
+    if player==1:
+        colour=CREAM
+    elif player==2:
+        colour=BLACK
+
+    pygame.draw.line(screen,colour,(posX,15),(posX,HEIGHT-15),15)
+
+def draw_horizantal_winning_line(row,player):
+    posY=row*200+100
+    if player==1:
+        colour=CREAM
+    elif player==2:
+        colour=BLACK
+
+    pygame.draw.line(screen,colour,(15,posY),(WIDTH-15,posY),15)
+
+def draw_asscending_diagonol(player):
+    if player==1:
+        colour=CREAM
+    elif player==2:
+        colour=BLACK
+
+    pygame.draw.line(screen,colour,(15,HEIGHT-15),(WIDTH-15,15),15)
+    
+
+def darw_decending_diagonol(player):
+    if player==1:
+        colour=CREAM
+    elif player==2:
+        colour=BLACK
+
+    pygame.draw.line(screen,colour,(15,15),(WIDTH-15,HEIGHT-15),15)
+
+def restart():
+    pass
+
+
 
 draw_lines()
 
@@ -78,9 +134,11 @@ while True:
             if available_square(clicked_row,clicked_coloumn):
                 if player ==1:
                     mark_square(clicked_row,clicked_coloumn,1)
+                    check_win(player)
                     player =2
                 elif player ==2:
                     mark_square(clicked_row,clicked_coloumn,2)
+                    check_win(player)
                     player =1
 
                 darw_figures()
