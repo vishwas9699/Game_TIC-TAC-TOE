@@ -43,6 +43,8 @@ def is_board_full():
 
 draw_lines()
 
+player=1
+
 #mainloop
 while True:
     for event in pygame.event.get():
@@ -55,6 +57,15 @@ while True:
 
             clicked_row=int(mouseY//200)
             clicked_coloumn=int(mouseX//200)
+
+            if available_square(clicked_row,clicked_coloumn):
+                if player ==1:
+                    mark_square(clicked_row,clicked_coloumn,1)
+                    player =2
+                elif player ==2:
+                    mark_square(clicked_row,clicked_coloumn,2)
+                    player =1
+                print(board)
 
 
 
