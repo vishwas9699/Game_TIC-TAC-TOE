@@ -62,7 +62,7 @@ def check_win(player):
         if board[0][coloumn]==player and board[1][coloumn]==player and board[2][coloumn]==player:
             draw_vertical_winning_line(coloumn,player)
             return True
-    for coloumn in range(BOARD_ROWS):
+    for row in range(BOARD_ROWS):
         if board[row][0]==player and board[row][1]==player and board[row][2]==player:
             draw_horizantal_winning_line(row,player)
             return True    
@@ -110,13 +110,19 @@ def darw_decending_diagonol(player):
     pygame.draw.line(screen,colour,(15,15),(WIDTH-15,HEIGHT-15),15)
 
 def restart():
-    pass
+    screen.fill(BACKGROUND_COLOUR)
+    draw_lines()
+    player=1
+    for row in range(BOARD_ROWS):
+        for coloumn in range(BOARD_COLOUMN):
+            board[row][coloumn]=0
 
 
 
 draw_lines()
 
 player=1
+game_over=False
 
 #mainloop
 while True:
@@ -124,7 +130,7 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
-        if event.type==pygame.MOUSEBUTTONDOWN:
+        if event.type==pygame.MOUSEBUTTONDOWN and not game_over:
             mouseX=event.pos[0]
             mouseY=event.pos[1]
 
@@ -134,14 +140,20 @@ while True:
             if available_square(clicked_row,clicked_coloumn):
                 if player ==1:
                     mark_square(clicked_row,clicked_coloumn,1)
-                    check_win(player)
+                    if check_win(player):
+                        game_over=True
                     player =2
                 elif player ==2:
                     mark_square(clicked_row,clicked_coloumn,2)
-                    check_win(player)
+                    if check_win(player):
+                        game_over=True
                     player =1
 
                 darw_figures()
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_r:
+                restart()
                 
 
 
